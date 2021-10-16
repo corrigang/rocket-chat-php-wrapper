@@ -11,6 +11,19 @@ class User extends Request
 {
     use Data;
 
+    public function setUserAuthToken($token){
+        $this->authToken = $token;
+    }
+
+    public static function createOutOfResponse($response)
+    {
+        $user = new self($response->me->_id);
+        $user->setUserAuthToken($response->authToken);
+
+        return $user->updateOutOfResponse($response->me);
+    }
+
+
     /**
      * Gets user listing
      *

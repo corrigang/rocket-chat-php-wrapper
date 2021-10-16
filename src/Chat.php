@@ -40,7 +40,7 @@ class Chat extends Request
             static::setAuthToken(static::getResponse()->data->authToken);
         }
 
-        return User::createOutOfResponse(static::getResponse()->data->me);
+        return User::createOutOfResponse(static::getResponse()->data);
     }
 
     /**
