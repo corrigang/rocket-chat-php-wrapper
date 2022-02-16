@@ -152,7 +152,7 @@ abstract class Request implements JsonSerializable
         }
 
         if (($method == "POST")) {
-            if (!empty($files)) {
+            if (!empty($files) || !empty($uploads)) {
                 $multipart = [];
 
                 foreach ($files as $key => $value) {
@@ -168,7 +168,7 @@ abstract class Request implements JsonSerializable
                     $multipart[] = [
                         "name" => 'file',
                         "contents" => fopen($value['filename'], 'r'), // TODO: Check if file is readable, is_readable function
-                        "filename" => $key,
+                        "filename" => $value,
                         "headers" => [
                             'Content-Type' => 'application/text',
                         ]
