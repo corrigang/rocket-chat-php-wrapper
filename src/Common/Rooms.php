@@ -16,7 +16,7 @@ class Rooms
             self::$roomList = Channel::listing();
             /** @var Channel $c */
             foreach (self::$roomList as $c) {
-                self::$roomMap[$c->getName()] = $c;
+                self::$roomMap[$c->getName()] = $c->getRoomId();
             }
         }
         return self::$roomList;
