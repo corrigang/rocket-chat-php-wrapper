@@ -167,8 +167,11 @@ abstract class Request implements JsonSerializable
                 foreach ($uploads as $key => $value) {
                     $multipart[] = [
                         "name" => 'file',
-                        "contents" => fopen($value, 'r'), // TODO: Check if file is readable, is_readable function
-                        "filename" => $key
+                        "contents" => fopen($value['filename'], 'r'), // TODO: Check if file is readable, is_readable function
+                        "filename" => $key,
+                        "headers" => [
+                            'Content-Type' => 'application/text',
+                        ]
                     ];
                 }
 
