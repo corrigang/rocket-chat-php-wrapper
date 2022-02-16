@@ -154,6 +154,7 @@ abstract class Request implements JsonSerializable
         if (($method == "POST")) {
             if (!empty($files) || !empty($uploads)) {
                 $multipart = [];
+                $files = $files ?? [];
 
                 foreach ($files as $key => $value) {
                     $multipart[] = [
@@ -164,6 +165,7 @@ abstract class Request implements JsonSerializable
                 }
 
                 // For an upload, the name *MUST* be file
+                $uploads = $uploads ?? [];
                 foreach ($uploads as $key => $value) {
                     $multipart[] = [
                         "name" => 'file',
