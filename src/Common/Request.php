@@ -2,10 +2,12 @@
 
 namespace ATDev\RocketChat\Common;
 
+use JsonSerializable;
+
 /**
  * Basic functionality to make a requests to api
  */
-abstract class Request implements \JsonSerializable
+abstract class Request implements JsonSerializable
 {
 
     /** @const string Uri to api */
@@ -81,7 +83,7 @@ abstract class Request implements \JsonSerializable
      *
      * @return boolean
      */
-    protected static function send($url, $method = "GET", $data = null, $files = null)
+    protected static function send($url, $method = "GET", $data = null, $files = null, $uploads = null)
     {
         if (empty(self::$client)) {
             static::setError("Chat url is not set");
@@ -96,7 +98,7 @@ abstract class Request implements \JsonSerializable
         static::$success = true;
 
         // Get request options
-        $options = self::getRequestOptions($method, $data, $files);
+        $options = self::getRequestOptions($method, $data, $files, $uploads);
 
         // Do request
         $res = self::$client->request( // // TODO: Check api is available, catch the guzzle exception
@@ -134,7 +136,7 @@ abstract class Request implements \JsonSerializable
      *
      * @return array
      */
-    private static function getRequestOptions($method, $data, $files)
+    private static function getRequestOptions($method, $data, $files, $uploads)
     {
 
         // Default request parameters
@@ -158,6 +160,15 @@ abstract class Request implements \JsonSerializable
                         "name" => $key,
                         "contents" => fopen($value, 'r'), // TODO: Check if file is readable, is_readable function
                         "filename" => basename($value)
+                    ];
+                }
+
+                // For an upload, the name *MUST* be file
+                foreach ($uploads as $key => $value) {
+                    $multipart[] = [
+                        "name" => 'file',
+                        "contents" => fopen($value, 'r'), // TODO: Check if file is readable, is_readable function
+                        "filename" => $key
                     ];
                 }
 
