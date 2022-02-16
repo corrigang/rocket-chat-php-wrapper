@@ -1,5 +1,5 @@
 {
-	"name": "gcorrigan/rocket-chat-php-wrapper",
+	"name": "viper-vlad/rocket-chat-php-wrapper",
 	"description": "Rocket Chat REST API PHP Wrapper Library",
 	"keywords": ["rocketchat", "rest", "api"],
 	"homepage": "https://github.com/alekseykuleshov/rocket-chat",
