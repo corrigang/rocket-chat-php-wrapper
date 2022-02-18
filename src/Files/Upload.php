@@ -19,7 +19,7 @@ class Upload extends Request
         Request::send(
             $url,
             'POST',
-            null,
+            [ 'emoji' => ':card_file_box:' ],
             null,
             $files
         );
