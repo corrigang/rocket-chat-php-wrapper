@@ -2,6 +2,7 @@
 
 namespace ATDev\RocketChat\Common;
 
+use GuzzleHttp\Client;
 use JsonSerializable;
 
 /**
@@ -28,8 +29,8 @@ abstract class Request implements JsonSerializable
     /** @var boolean Indicates if request was successful */
     protected static $success;
 
-    /** @var \GuzzleHttp\Client client */
-    private static $client;
+    /** @var Client client */
+    private static Client $client;
 
     /** @var string Chat user id */
     private static $authUserId;
@@ -46,7 +47,7 @@ abstract class Request implements JsonSerializable
      */
     public static function setUrl($instance)
     {
-        self::$client = new \GuzzleHttp\Client([
+        self::$client = new Client([
 
             "base_uri" => $instance . self::URI,
             "allow_redirects" => ["track_redirects" => true]
