@@ -47,10 +47,10 @@ abstract class Request implements JsonSerializable
      */
     public static function setUrl($instance)
     {
-        self::$client = new Client([
+        self::$client = new Client([ 
 
             "base_uri" => $instance . self::URI,
-            "allow_redirects" => ["track_redirects" => true]
+            "allow_redirects" => [ "track_redirects" => true ]
         ]);
     }
 
@@ -114,7 +114,7 @@ abstract class Request implements JsonSerializable
 
         static::$response = @json_decode($responseBody);
         static::$responseCode = $responseCode;
-        static::$responseUrl = (!empty($headersRedirect)) ? $headersRedirect[count($headersRedirect) - 1] : null;
+        static::$responseUrl = (!empty($headersRedirect)) ? $headersRedirect[ count($headersRedirect) - 1 ] : null;
 
         if (isset(static::$response->success) && (!static::$response->success)) {
             if (isset(static::$response->error)) {
@@ -141,7 +141,7 @@ abstract class Request implements JsonSerializable
     {
 
         // Default request parameters
-        $options = [
+        $options = [ 
             "timeout" => 60,
             "connect_timeout" => 60,
             "exceptions" => false
@@ -158,7 +158,7 @@ abstract class Request implements JsonSerializable
                 $files = $files ?? [];
 
                 foreach ($files as $key => $value) {
-                    $multipart[] = [
+                    $multipart[] = [ 
                         "name" => $key,
                         "contents" => fopen($value, 'r'), // TODO: Check if file is readable, is_readable function
                         "filename" => basename($value)
@@ -168,11 +168,11 @@ abstract class Request implements JsonSerializable
                 // For an upload, the name *MUST* be file
                 $uploads = $uploads ?? [];
                 foreach ($uploads as $key => $value) {
-                    $multipart[] = [
+                    $multipart[] = [ 
                         "name" => 'file',
                         "contents" => fopen($value, 'r'), // TODO: Check if file is readable, is_readable function
                         "filename" => $key,
-                        "headers" => [
+                        "headers" => [ 
                             'Content-Type' => 'application/text',
                         ]
                     ];
@@ -180,7 +180,7 @@ abstract class Request implements JsonSerializable
 
                 if (!empty($data)) {
                     foreach ($data as $key => $value) {
-                        $multipart[] = [
+                        $multipart[] = [ 
                             "name" => $key,
                             "contents" => $value
                         ];
@@ -276,7 +276,7 @@ abstract class Request implements JsonSerializable
      *
      * @return mixed Data to serialize
      */
-    public function jsonSerialize()
+    public function jsonSerialize() : mixed
     {
         return null;
     }
