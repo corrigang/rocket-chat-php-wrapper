@@ -301,9 +301,9 @@ trait Room
     /**
      * Gets full room data to submit to api
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize()
+    public function jsonSerialize() : mixed
     {
         $roomData = [
             "name" => $this->name

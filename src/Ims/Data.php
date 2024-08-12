@@ -68,9 +68,9 @@ trait Data
     /**
      * Gets full im data to submit to api
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize()
+    public function jsonSerialize() : mixed
     {
         $imData = [];
         if (!is_null($this->username)) {

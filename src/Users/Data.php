@@ -686,9 +686,9 @@ trait Data
     /**
      * Gets full user data to submit to api
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize()
+    public function jsonSerialize() : mixed
     {
         $userData = [
             "email" => $this->email,

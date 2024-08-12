@@ -197,9 +197,9 @@ trait Data
     /**
      * Gets full role data to submit to api
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize()
+    public function jsonSerialize() : mixed
     {
         $roleData = ['name' => $this->name];
         if (!is_null($this->scope)) {

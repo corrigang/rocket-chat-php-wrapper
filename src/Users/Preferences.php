@@ -178,9 +178,9 @@ class Preferences implements \JsonSerializable
     /**
      * Returns preferences data to submit to api
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize()
+    public function jsonSerialize() : mixed
     {
         return array_filter(get_object_vars($this), function ($v) { return !is_null($v); });
     }

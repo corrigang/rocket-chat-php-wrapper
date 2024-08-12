@@ -449,9 +449,9 @@ trait Data
     /**
      * Prepares message data to be sent to API
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize()
+    public function jsonSerialize() : mixed
     {
         $messageData = ['roomId' => $this->roomId];
         if (!is_null($this->text)) {
